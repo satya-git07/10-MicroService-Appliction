@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        
         DOCKER_HUB_USER = 'satyadockerhub07'
         CREDENTIALS_ID = 'docker-credentials'
         GOOGLE_CREDENTIALS = credentials('gcp-sa')
@@ -20,13 +19,11 @@ pipeline {
             }
         }
 
-        stages {
-          stage('Git Checkout') {
-              steps {
-                  // Checkout the repository using the defined branch
-                  git url: 'https://github.com/satya-git07/10-MicroService-Appliction.git', branch: "${GIT_BRANCH}"
-              }
-          } 
+        stage('Git Checkout') {
+            steps {
+                // Checkout the repository using the defined branch
+                git url: 'https://github.com/satya-git07/10-MicroService-Appliction.git', branch: "${GIT_BRANCH}"
+            }
         }
 
         stage('Build Microservices') {
