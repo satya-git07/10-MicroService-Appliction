@@ -7,21 +7,24 @@ pipeline {
       }
     }
 
-    stage('SonarQube Analysis') {
-      steps {
-        script {
-          /opt/sonar-scanner-new/sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner \
-                -Dsonar.projectKey=microservices \
-                -Dsonar.sources=. \
-                -Dsonar.host.url=http://192.168.2.179:9000 \
-                -Dsonar.login=squ_72b77942df8a13046d0d2587444952542bd41bd3 \
-                -Dsonar.java.binaries=target/classes
+    
+  stage('SonarQube Analysis') {
+              steps {
+                  script {
+                      // Run SonarQube analysis using sonar-scanner
+                      sh """
+                          /opt/sonar-scanner-new/sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner \
+                              -Dsonar.projectKey="tiktoktoe" \
+                              -Dsonar.sources="." \
+                              -Dsonar.host.url="http://192.168.2.179:9000" \
+                              -Dsonar.login="squ_ed34cb324eb747588d83f3543d713e9378421d68"
+                              -Dsonar.java.binaries=target/classes
+                      """
+                  }
+              }
+          }
 
-        }
-
-      }
-    }
-
+    
     stage('Docker Build & Push') {
       steps {
         script {
