@@ -14,7 +14,7 @@ pipeline {
                       // Run SonarQube analysis using sonar-scanner
                       sh """
                           /opt/sonar-scanner-new/sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner \
-                              -Dsonar.projectKey="tiktoktoe" \
+                              -Dsonar.projectKey="microservices" \
                               -Dsonar.sources="." \
                               -Dsonar.host.url="http://192.168.2.179:9000" \
                               -Dsonar.login="squ_ed34cb324eb747588d83f3543d713e9378421d68"
