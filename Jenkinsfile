@@ -28,11 +28,11 @@ pipeline {
       }
     }
 
-    stage('Maven Build') {
+    stage('Gradle Build') {
       steps {
         script {
-          // Running Maven clean install to build the project and generate .class files
-          sh 'mvn clean install'
+          // Running Gradle build to build the project and generate .class files
+          sh './gradlew build'  // Uses the Gradle wrapper to build the project
         }
       }
     }
