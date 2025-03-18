@@ -28,7 +28,7 @@ pipeline {
       }
     }
 
-    stage('Build Microservices') {
+  stage('Build Microservices') {
             parallel {
                 stage('Build adservice') {
                     steps {
