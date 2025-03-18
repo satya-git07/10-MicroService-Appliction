@@ -25,9 +25,8 @@ pipeline {
             steps {
                 // Checkout the repository using the defined branch
                 git url: 'https://github.com/satya-git07/10-MicroService-Appliction.git', branch: "${GIT_BRANCH}"
-                
-
             }
+        } 
         }
 
         stage('Build Microservices') {
