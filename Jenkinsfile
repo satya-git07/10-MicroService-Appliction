@@ -28,15 +28,21 @@ pipeline {
       }
     }
 
-    stage('Gradle Build') {
-      steps {
-        script {
-          // Running Gradle build to build the project and generate .class files
-          
-          sh '10-MicroService-Appliction/scr/gradlew build'  // Uses the Gradle wrapper to build the project
-        }
-      }
-    }
+    stage('Build Microservices') {
+            parallel {
+                stage('Build adservice') {
+                    steps {
+                        dir('10-MicroService-Appliction/src/adservice') {
+                            script {
+                                sh 'export JAVA_HOME=/usr/lib/jvm/java-21-openjdk'   // Switch to Java 21
+                                sh 'export PATH=$JAVA_HOME/bin:$PATH'
+                                sh 'java -version'   // Verify the Java version is 21
+                                sh 'chmod +x gradlew'
+                                sh './gradlew build -x verifyGoogleJavaFormat'
+                            }
+                        }
+                    }
+                }
 
     stage('SonarQube Analysis') {
       steps {
