@@ -35,28 +35,38 @@ pipeline {
                         }
                     }
                 }
-                stage('Build checkoutservice & others') {
-                    matrix {
-                        axes {
-                            axis {
-                                name 'SERVICE'
-                                values 'checkoutservice', 'productcatalogservice', 'shippingservice', 'frontend', 'paymentservice'
-                            }
+                stage('Build checkoutservice') {
+                    steps {
+                        dir('10-MicroService-Appliction/src/checkoutservice') {
+                            sh 'go build -o checkoutservice .'
                         }
-                        stages {
-                            stage('Build Service') {
-                                steps {
-                                    dir("10-MicroService-Appliction/src/${SERVICE}") {
-                                        script {
-                                            if (SERVICE == 'checkoutservice' || SERVICE == 'productcatalogservice' || SERVICE == 'shippingservice') {
-                                                sh 'go build -o ${SERVICE} .'
-                                            } else if (SERVICE == 'frontend' || SERVICE == 'paymentservice') {
-                                                sh 'npm install --only=production'
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                    }
+                }
+                stage('Build productcatalogservice') {
+                    steps {
+                        dir('10-MicroService-Appliction/src/productcatalogservice') {
+                            sh 'go build -o productcatalogservice .'
+                        }
+                    }
+                }
+                stage('Build shippingservice') {
+                    steps {
+                        dir('10-MicroService-Appliction/src/shippingservice') {
+                            sh 'go build -o shippingservice .'
+                        }
+                    }
+                }
+                stage('Build frontend') {
+                    steps {
+                        dir('10-MicroService-Appliction/src/frontend') {
+                            sh 'npm install --only=production'
+                        }
+                    }
+                }
+                stage('Build paymentservice') {
+                    steps {
+                        dir('10-MicroService-Appliction/src/paymentservice') {
+                            sh 'npm install --only=production'
                         }
                     }
                 }
@@ -65,22 +75,45 @@ pipeline {
 
         stage('Build Docker Images') {
             parallel {
-                stage('Build Docker Images for Services') {
-                    matrix {
-                        axes {
-                            axis {
-                                name 'SERVICE'
-                                values 'adservice', 'checkoutservice', 'emailservice', 'loadgenerator', 'productcatalogservice', 'shippingservice', 'cartservice', 'currencyservice', 'frontend', 'paymentservice', 'recommendationservice'
-                            }
+                stage('Build adservice Image') {
+                    steps {
+                        dir('10-MicroService-Appliction/src/adservice') {
+                            sh "docker build -t ${DOCKER_HUB_USER}/adservice:latest ."
                         }
-                        stages {
-                            stage('Build Docker Image') {
-                                steps {
-                                    dir("10-MicroService-Appliction/src/${SERVICE}") {
-                                        sh "docker build -t ${DOCKER_HUB_USER}/${SERVICE}:latest ."
-                                    }
-                                }
-                            }
+                    }
+                }
+                stage('Build checkoutservice Image') {
+                    steps {
+                        dir('10-MicroService-Appliction/src/checkoutservice') {
+                            sh "docker build -t ${DOCKER_HUB_USER}/checkoutservice:latest ."
+                        }
+                    }
+                }
+                stage('Build productcatalogservice Image') {
+                    steps {
+                        dir('10-MicroService-Appliction/src/productcatalogservice') {
+                            sh "docker build -t ${DOCKER_HUB_USER}/productcatalogservice:latest ."
+                        }
+                    }
+                }
+                stage('Build shippingservice Image') {
+                    steps {
+                        dir('10-MicroService-Appliction/src/shippingservice') {
+                            sh "docker build -t ${DOCKER_HUB_USER}/shippingservice:latest ."
+                        }
+                    }
+                }
+                stage('Build frontend Image') {
+                    steps {
+                        dir('10-MicroService-Appliction/src/frontend') {
+                            sh "docker build -t ${DOCKER_HUB_USER}/frontend:latest ."
+                        }
+                    }
+                }
+                stage('Build paymentservice Image') {
+                    steps {
+                        dir('10-MicroService-Appliction/src/paymentservice') {
+                            sh "docker build -t ${DOCKER_HUB_USER}/paymentservice:latest ."
                         }
                     }
                 }
@@ -89,24 +122,62 @@ pipeline {
 
         stage('Push Docker Images to Docker Hub') {
             parallel {
-                stage('Push Docker Images') {
-                    matrix {
-                        axes {
-                            axis {
-                                name 'SERVICE'
-                                values 'adservice', 'checkoutservice', 'emailservice', 'loadgenerator', 'productcatalogservice', 'shippingservice', 'cartservice', 'currencyservice', 'frontend', 'paymentservice', 'recommendationservice'
+                stage('Push adservice Image') {
+                    steps {
+                        script {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                                sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
+                                sh "docker push ${DOCKER_HUB_USER}/adservice:latest"
                             }
                         }
-                        stages {
-                            stage('Push Image') {
-                                steps {
-                                    script {
-                                        withCredentials([usernamePassword(credentialsId: 'docker-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                                            sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
-                                            sh "docker push ${DOCKER_HUB_USER}/${SERVICE}:latest"
-                                        }
-                                    }
-                                }
+                    }
+                }
+                stage('Push checkoutservice Image') {
+                    steps {
+                        script {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                                sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
+                                sh "docker push ${DOCKER_HUB_USER}/checkoutservice:latest"
+                            }
+                        }
+                    }
+                }
+                stage('Push productcatalogservice Image') {
+                    steps {
+                        script {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                                sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
+                                sh "docker push ${DOCKER_HUB_USER}/productcatalogservice:latest"
+                            }
+                        }
+                    }
+                }
+                stage('Push shippingservice Image') {
+                    steps {
+                        script {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                                sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
+                                sh "docker push ${DOCKER_HUB_USER}/shippingservice:latest"
+                            }
+                        }
+                    }
+                }
+                stage('Push frontend Image') {
+                    steps {
+                        script {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                                sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
+                                sh "docker push ${DOCKER_HUB_USER}/frontend:latest"
+                            }
+                        }
+                    }
+                }
+                stage('Push paymentservice Image') {
+                    steps {
+                        script {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                                sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
+                                sh "docker push ${DOCKER_HUB_USER}/paymentservice:latest"
                             }
                         }
                     }
