@@ -11,11 +11,11 @@ pipeline {
       steps {
         script {
           /opt/sonar-scanner-new/sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner \
-    -Dsonar.projectKey=microservices \
-    -Dsonar.sources=. \
-    -Dsonar.host.url=http://192.168.2.179:9000 \
-    -Dsonar.login=squ_72b77942df8a13046d0d2587444952542bd41bd3 \
-    -Dsonar.java.binaries=target/classes
+                -Dsonar.projectKey=microservices \
+                -Dsonar.sources=. \
+                -Dsonar.host.url=http://192.168.2.179:9000 \
+                -Dsonar.login=squ_72b77942df8a13046d0d2587444952542bd41bd3 \
+                -Dsonar.java.binaries=target/classes
 
         }
 
