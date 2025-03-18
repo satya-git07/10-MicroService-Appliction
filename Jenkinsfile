@@ -9,9 +9,17 @@ pipeline {
         GOOGLE_CREDENTIALS_ID = 'gcp-sa'
         DOCKERHUB_USERNAME = 'satyadockerhub07'  // Set your Docker Hub username
         DOCKERHUB_REPO = 'satyadockerhub07/microservices'  // Set your Docker Hub repository name
-        MICRO_SERVICES = ['adservice', 'cartservice', 'checkoutservice', 'currencyservice', 'emailservice', 
-                          'frontend', 'loadgenerator', 'paymentservice', 'productcatalogservice', 'recommendationservice', 
-                          'redis', 'shippingservice'] // List your microservices here
+        AD_SERVICE_IMAGE = 'adservice'
+        CHECKOUT_SERVICE_IMAGE = 'checkoutservice'
+        EMAIL_SERVICE_IMAGE = 'emailservice'
+        LOADGEN_SERVICE_IMAGE = 'loadgenerator'
+        PRODUCT_SERVICE_IMAGE = 'productcatalogservice'
+        SHIPPING_SERVICE_IMAGE = 'shippingservice'
+        CART_SERVICE_IMAGE = 'cartservice'
+        CURRENCY_SERVICE_IMAGE = 'currencyservice'
+        FRONTEND_SERVICE_IMAGE = 'frontend'
+        PAYMENT_SERVICE_IMAGE = 'paymentservice'
+        RECOMMENDATION_SERVICE_IMAGE = 'recommendationservice'
     }
   
 
