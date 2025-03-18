@@ -9,6 +9,8 @@ pipeline {
         PROJECT_ID = 'lyrical-bus-452711-c5'
         REGION = 'us-west3-c'
         CLUSTER_NAME = 'my-cluster11'
+        GOPATH = '/usr/local/go'
+        GOROOT = '/usr/local/go'
     }
 
     stages {
