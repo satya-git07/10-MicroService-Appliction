@@ -13,6 +13,7 @@ pipeline {
                           'frontend', 'loadgenerator', 'paymentservice', 'productcatalogservice', 'recommendationservice', 
                           'redis', 'shippingservice'] // List your microservices here
     }
+  
 
     stages {
         stage('Git Checkout') {
