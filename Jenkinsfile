@@ -7,6 +7,15 @@ pipeline {
       }
     }
 
+  stages {
+        stage('Maven Build') {
+            steps {
+                script {
+                    // Running Maven clean install to build the project and generate .class files
+                    sh 'mvn clean install'
+                }
+            }
+        }
     
   stage('SonarQube Analysis') {
               steps {
