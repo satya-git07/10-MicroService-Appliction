@@ -32,7 +32,8 @@ pipeline {
       steps {
         script {
           // Running Gradle build to build the project and generate .class files
-          sh './gradlew build'  // Uses the Gradle wrapper to build the project
+          
+          sh '10-MicroService-Appliction/scr/gradlew build'  // Uses the Gradle wrapper to build the project
         }
       }
     }
