@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        REPO_URL = 'https://github.com/satya-git07/10-MicroService-Appliction.git'
+        
         DOCKER_HUB_USER = 'satyadockerhub07'
         CREDENTIALS_ID = 'docker-credentials'
         GOOGLE_CREDENTIALS = credentials('gcp-sa')
@@ -20,11 +20,13 @@ pipeline {
             }
         }
 
-        stage('Clone Repository') {
+        stages {
+        stage('Git Checkout') {
             steps {
-                script {
-                    sh 'git clone --depth=1 ${REPO_URL}'
-                }
+                // Checkout the repository using the defined branch
+                git url: 'https://github.com/satya-git07/10-MicroService-Appliction.git', branch: "${GIT_BRANCH}"
+                
+
             }
         }
 
