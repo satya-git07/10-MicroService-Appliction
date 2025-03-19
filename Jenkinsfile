@@ -309,32 +309,7 @@ pipeline {
             }
         }
 
-        
-        //         stage('Terraform Apply: Create GKE Cluster') {
-        //     steps {
-        //         script {
-        //             withCredentials([file(credentialsId: 'gcp-key', variable: 'GCP_KEY')]) {
-        //                 // Set the GOOGLE_APPLICATION_CREDENTIALS environment variable
-        //                 sh 'export GOOGLE_APPLICATION_CREDENTIALS=$GCP_KEY'
-        
-        //                 // Authenticate with Google Cloud
-        //                 sh 'gcloud auth activate-service-account --key-file=$GCP_KEY'
-        //                 sh 'gcloud config set project ${PROJECT_ID}'
-        //                 sh 'gcloud config set compute/region ${REGION}'
-        
-        //                 // Change directory to where Terraform configuration files are located
-        //                 dir('10-MicroService-Appliction/terra') {
-        //                     // Initialize Terraform
-        //                     sh 'terraform init'
-        
-        //                     // Apply Terraform plan to create resources
-        //                     sh 'terraform apply -auto-approve'
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-
+      
         
                 stage('Terraform: Apply Infrastructure') {
              steps {
