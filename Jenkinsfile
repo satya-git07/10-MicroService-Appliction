@@ -199,7 +199,7 @@ pipeline {
                 stage('Push adservice Image') {
                     steps {
                         script {
-                            withCredentials([usernamePassword(credentialsId: 'docker-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                                 sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
                                 sh 'docker push ${AD_SERVICE_IMAGE}'
                             }
@@ -209,7 +209,7 @@ pipeline {
                 stage('Push checkoutservice Image') {
                     steps {
                         script {
-                            withCredentials([usernamePassword(credentialsId: 'docker-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                                 sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
                                 sh 'docker push ${CHECKOUT_SERVICE_IMAGE}'
                             }
@@ -219,7 +219,7 @@ pipeline {
                 stage('Push emailservice Image') {
                     steps {
                         script {
-                            withCredentials([usernamePassword(credentialsId: 'docker-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                                 sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
                                 sh 'docker push ${EMAIL_SERVICE_IMAGE}'
                             }
@@ -229,7 +229,7 @@ pipeline {
                 stage('Push loadgenerator Image') {
                     steps {
                         script {
-                            withCredentials([usernamePassword(credentialsId: 'docker-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                                 sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
                                 sh 'docker push ${LOADGEN_SERVICE_IMAGE}'
                             }
@@ -239,7 +239,7 @@ pipeline {
                 stage('Push productcatalogservice Image') {
                     steps {
                         script {
-                            withCredentials([usernamePassword(credentialsId: 'docker-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                                 sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
                                 sh 'docker push ${PRODUCT_SERVICE_IMAGE}'
                             }
@@ -249,7 +249,7 @@ pipeline {
                 stage('Push shippingservice Image') {
                     steps {
                         script {
-                            withCredentials([usernamePassword(credentialsId: 'docker-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                                 sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
                                 sh 'docker push ${SHIPPING_SERVICE_IMAGE}'
                             }
@@ -259,7 +259,7 @@ pipeline {
                 stage('Push cartservice Image') {
                     steps {
                         script {
-                            withCredentials([usernamePassword(credentialsId: 'docker-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                                 sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
                                 sh 'docker push ${CART_SERVICE_IMAGE}'
                             }
@@ -269,7 +269,7 @@ pipeline {
                 stage('Push currencyservice Image') {
                     steps {
                         script {
-                            withCredentials([usernamePassword(credentialsId: 'docker-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                                 sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
                                 sh 'docker push ${CURRENCY_SERVICE_IMAGE}'
                             }
@@ -279,7 +279,7 @@ pipeline {
                 stage('Push frontend Image') {
                     steps {
                         script {
-                            withCredentials([usernamePassword(credentialsId: 'docker-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                                 sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
                                 sh 'docker push ${FRONTEND_SERVICE_IMAGE}'
                             }
@@ -289,7 +289,7 @@ pipeline {
                 stage('Push paymentservice Image') {
                     steps {
                         script {
-                            withCredentials([usernamePassword(credentialsId: 'docker-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                                 sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
                                 sh 'docker push ${PAYMENT_SERVICE_IMAGE}'
                             }
@@ -299,7 +299,7 @@ pipeline {
                 stage('Push recommendationservice Image') {
                     steps {
                         script {
-                            withCredentials([usernamePassword(credentialsId: 'docker-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                            withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                                 sh 'echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin'
                                 sh 'docker push ${RECOMMENDATION_SERVICE_IMAGE}'
                             }
